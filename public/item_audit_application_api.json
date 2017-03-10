@@ -1,0 +1,662 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "item audit system api in application"
+    },
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/api/microcosm/v1",
+    "paths": {
+        "/item/audit/home": {
+            "get": {
+                "description": "audit home page",
+                "tags": [
+                    "home"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "response OK",
+                        "schema": {
+                            "title": "result",
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/departments": {
+            "get": {
+                "description": "load list of department that provide service",
+                "tags": [
+                    "departments"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "a list of departmentDTO object",
+                        "schema": {
+                            "title": "departmentListDTO",
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "department": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Department"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/items": {
+            "get": {
+                "description": "find item by parameters",
+                "tags": [
+                    "item"
+                ],
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "query",
+                        "required": false,
+                        "description": "item's id",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "departmentName",
+                        "in": "query",
+                        "required": false,
+                        "description": "department's name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "item's status",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true,
+                        "description": "the count of each page show",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "currentPage",
+                        "in": "query",
+                        "required": true,
+                        "description": "current page",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "a list of item",
+                        "schema": {
+                            "title": "itemListDTO",
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Item"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/detail": {
+            "get": {
+                "description": "query detail info of item",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "required": true,
+                        "description": "item's id",
+                        "type": "integer"
+                    }
+                ],
+                "tags": [
+                    "item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "item info",
+                        "schema": {
+                            "title": "ItemDTO",
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "price": {
+                                            "type": "integer"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "desc": {
+                                            "type": "string"
+                                        },
+                                        "departmentId": {
+                                            "type": "intger"
+                                        },
+                                        "category": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "levelOneId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelOneName": {
+                                                    "type": "string"
+                                                },
+                                                "levelTwoId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelTwoName": {
+                                                    "type": "string"
+                                                },
+                                                "levelThreeId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelThreeName": {
+                                                    "type": "string"
+                                                },
+                                                "levelFourId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelFourName": {
+                                                    "type": "string"
+                                                },
+                                                "levelFiveId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelFiveName": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "picture": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "itemProp": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/ItemProp"
+                                            }
+                                        },
+                                        "serviceItem": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/ServiceItem"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/abnormal": {
+            "patch": {
+                "description": "item status will be abnormal, after this action",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "required": true,
+                        "description": "item's id",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "operation",
+                        "in": "body",
+                        "description": "save the action info",
+                        "schema": {
+                            "$ref": "#/definitions/Operation"
+                        }
+                    }
+                ],
+                "tags": [
+                    "item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "resonpse ok ,show item info",
+                        "schema": {
+                            "title": "update item's status",
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "$ref": "#/definitions/Item"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/preOnline": {
+            "patch": {
+                "description": "item status will be pre_online ,after this action",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "description": "item's id"
+                    }
+                ],
+                "tags": [
+                    "item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "response OK ,show item info",
+                        "schema": {
+                            "title": "itemDTO",
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "$ref": "#/definitions/Item"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{iteId}/enter-audit": {
+            "get": {
+                "description": "to item audit page",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true,
+                        "description": "item's id"
+                    }
+                ],
+                "tags": [
+                    "item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "response OK, get item and itemService info",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "price": {
+                                            "type": "integer"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "desc": {
+                                            "type": "string"
+                                        },
+                                        "departmentId": {
+                                            "type": "intger"
+                                        },
+                                        "category": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "levelOneId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelOneName": {
+                                                    "type": "string"
+                                                },
+                                                "levelTwoId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelTwoName": {
+                                                    "type": "string"
+                                                },
+                                                "levelThreeId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelThreeName": {
+                                                    "type": "string"
+                                                },
+                                                "levelFourId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelFourName": {
+                                                    "type": "string"
+                                                },
+                                                "levelFiveId": {
+                                                    "type": "integer"
+                                                },
+                                                "levelFiveName": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "picture": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "itemProp": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/ItemProp"
+                                            }
+                                        },
+                                        "serviceItem": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/ServiceItem"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/audit-denied": {
+            "patch": {
+                "description": "audit audit denied , add denied reason",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true,
+                        "description": "item's id"
+                    },
+                    {
+                        "name": "operation",
+                        "in": "body",
+                        "required": true,
+                        "description": "save the action info",
+                        "schema": {
+                            "$ref": "#/definitions/Operation"
+                        }
+                    }
+                ],
+                "tags": [
+                    "item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "item status will be draft ,after this action",
+                        "schema": {
+                            "title": "itemDTO",
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "$ref": "#/definitions/Item"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/approve": {
+            "patch": {
+                "description": "item approved , add audit info",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true,
+                        "description": "item's id"
+                    },
+                    {
+                        "name": "operation",
+                        "in": "body",
+                        "required": true,
+                        "description": "save the action info",
+                        "schema": {
+                            "$ref": "#/definitions/Operation"
+                        }
+                    }
+                ],
+                "tags": [
+                    "item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "responses OK, item status will be approved",
+                        "schema": {
+                            "title": "result",
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Result": {
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "code": {
+                    "type": "integer"
+                },
+                "msg": {
+                    "type": "string"
+                },
+                "displayMsg": {
+                    "type": "string"
+                }
+            }
+        },
+        "Organization": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                }
+            }
+        },
+        "Department": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "organization": {
+                    "$ref": "#/definitions/Organization"
+                }
+            }
+        },
+        "Item": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "department": {
+                    "$ref": "#/definitions/Department"
+                }
+            }
+        },
+        "Operator": {
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "OperationAction": {
+            "properties": {
+                "operator": {
+                    "$ref": "#/definitions/Operator"
+                }
+            }
+        },
+        "Operation": {
+            "properties": {
+                "operationAction": {
+                    "$ref": "#/definitions/OperationAction"
+                },
+                "action": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "integer"
+                },
+                "perviousState": {
+                    "type": "integer"
+                },
+                "nextState": {
+                    "type": "integer"
+                },
+                "extraInfo": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceItem": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "originPrice": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "picture": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ItemPropValue": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "ItemProp": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "itemId": {
+                    "type": "integer"
+                },
+                "itemPropValue": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ItemPropValue"
+                    }
+                }
+            }
+        }
+    }
+}

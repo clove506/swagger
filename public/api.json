@@ -1,0 +1,923 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Item API",
+        "description": "Item Suport System -> Dagon API",
+        "version": "1.0.0"
+    },
+    "host": "api.zhushou.dev.youhujia.com",
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/api/dagon/v2",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/items/{departmentId}": {
+            "get": {
+                "summary": "Item List.",
+                "description": "Item system's list of item by departmentId.\n",
+                "tags": [
+                    "Item"
+                ],
+                "parameters": [
+                    {
+                        "name": "departmentId",
+                        "in": "path",
+                        "description": "the departmentId of nurse.",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "$ref": "#/definitions/ItemDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/serviceInfo": {
+            "get": {
+                "summary": "get item's service info by id.",
+                "description": "get service info by itemId.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "serviceInfo": {
+                                    "$ref": "#/definitions/ServiceInfoDTO"
+                                },
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/serviceItem": {
+            "get": {
+                "summary": "ItemService Info.",
+                "description": "Get ItemService info by itemId.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "serviceItem": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ServiceItemDTO"
+                                    }
+                                },
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{categoryId}/standardServices": {
+            "get": {
+                "summary": "get standardService list.",
+                "description": "categoryId standardService list by categroyId.",
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "categoryId which serviceProvider choose.",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "standardService": {
+                                    "$ref": "#/definitions/StandardService"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}": {
+            "get": {
+                "summary": "get item info.",
+                "description": "get item info by item id.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "$ref": "#/definitions/ItemDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/delete": {
+            "patch": {
+                "summary": "delete item by id.",
+                "description": "delete the itemId refers item.\n",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The result of the delete request.",
+                        "schema": {
+                            "$ref": "#/definitions/Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/audit": {
+            "patch": {
+                "summary": "submit item to audit.",
+                "description": "Submit item to audit by id.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "History information for the given user",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "Id of Item."
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "name of Item."
+                                        },
+                                        "departmentId": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "departmentId of Item."
+                                        },
+                                        "categoryId": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "categoryId of Item."
+                                        },
+                                        "state": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "state of Item."
+                                        },
+                                        "updateAt": {
+                                            "type": "integer",
+                                            "format": "long",
+                                            "description": "the last update time of Item."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/online": {
+            "patch": {
+                "summary": "online item.",
+                "description": "Service provider Online item.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "Id of Item."
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "name of Item."
+                                        },
+                                        "departmentId": {
+                                            "type": "long",
+                                            "format": "double",
+                                            "description": "departmentId of Item."
+                                        },
+                                        "categoryId": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "categoryId of Item."
+                                        },
+                                        "state": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "state of Item."
+                                        },
+                                        "updateAt": {
+                                            "type": "integer",
+                                            "format": "long",
+                                            "description": "the last update time of Item."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/offline": {
+            "patch": {
+                "summary": "offline item.",
+                "description": "Service provider offline item.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "Id of Item."
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "name of Item."
+                                        },
+                                        "departmentId": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "departmentId of Item."
+                                        },
+                                        "categoryId": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "categoryId of Item."
+                                        },
+                                        "state": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "description": "state of Item."
+                                        },
+                                        "updateAt": {
+                                            "type": "integer",
+                                            "format": "long",
+                                            "description": "the last update time of Item."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/saveItem": {
+            "post": {
+                "summary": "save item.",
+                "description": "save item's basic info include prop and Value.",
+                "parameters": [
+                    {
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "description": "item basic info",
+                        "schema": {
+                            "$ref": "#/definitions/ItemOption"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "serviceItem": {
+                                    "$ref": "#/definitions/ServiceItemDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/saveServiceItem": {
+            "post": {
+                "summary": "save ServiceItem.",
+                "description": "save ServiceItem's info.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "long",
+                        "description": "serviceItem's itemId"
+                    },
+                    {
+                        "name": "serviceItem",
+                        "in": "body",
+                        "required": true,
+                        "description": "ServiceItem info",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceItemOption"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "serviceInfo": {
+                                    "properties": {
+                                        "avaiableServiceNurse": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "format": "long",
+                                                        "description": "Id of avaiable service nurse."
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "description": "name of avaiable service nurse."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/saveServiceInfo": {
+            "post": {
+                "summary": "Save service Info",
+                "description": "Save service Info.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "item's id",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    },
+                    {
+                        "name": "serviceIfno",
+                        "in": "body",
+                        "description": "item's service info",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ServiceInfoOption"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceInfoDTO"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ItemDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "Id of Item."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of Item."
+                },
+                "desc": {
+                    "type": "string",
+                    "description": "desc of Item."
+                },
+                "detailHTML": {
+                    "type": "string",
+                    "description": "detail info of Item."
+                },
+                "departmentId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "department of Item."
+                },
+                "categoryId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "category of Item."
+                },
+                "isDelete": {
+                    "type": "number",
+                    "format": "int32",
+                    "description": "Item is not avaliable."
+                },
+                "picture": {
+                    "type": "object",
+                    "description": "picture of Item.",
+                    "$ref": "#/definitions/Picture"
+                },
+                "duration": {
+                    "type": "number",
+                    "format": "int32",
+                    "description": "ServiceItem is not avaliable."
+                },
+                "state": {
+                    "type": "string",
+                    "description": "state of Item."
+                },
+                "availableServiceTime": {
+                    "type": "string",
+                    "description": "available Service Time of Item."
+                },
+                "itemProp": {
+                    "type": "object",
+                    "description": "itemProp and itemPropValue of Item.",
+                    "$ref": "#/definitions/ItemPropDTO"
+                }
+            }
+        },
+        "ItemOption": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "name of Item."
+                },
+                "desc": {
+                    "type": "string",
+                    "description": "desc of Item."
+                },
+                "detailHTML": {
+                    "type": "string",
+                    "description": "detail info of Item."
+                },
+                "departmentId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "department of Item."
+                },
+                "categoryId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "category of Item."
+                },
+                "isDelete": {
+                    "type": "number",
+                    "format": "int32",
+                    "description": "Item is not avaliable."
+                },
+                "picture": {
+                    "type": "object",
+                    "description": "picture of Item.",
+                    "$ref": "#/definitions/Picture"
+                },
+                "duration": {
+                    "type": "number",
+                    "format": "int32",
+                    "description": "ServiceItem is not avaliable."
+                },
+                "state": {
+                    "type": "string",
+                    "description": "state of Item."
+                },
+                "availableServiceTime": {
+                    "type": "string",
+                    "description": "available Service Time of Item."
+                },
+                "itemProp": {
+                    "type": "object",
+                    "description": "itemProp and itemPropValue of Item.",
+                    "$ref": "#/definitions/ItemPropOption"
+                }
+            }
+        },
+        "Picture": {
+            "type": "object",
+            "properties": {
+                "pictureItem": {
+                    "type": "array",
+                    "description": "Item's pictures.",
+                    "items": {
+                        "$ref": "#/definitions/PictureInfo"
+                    }
+                }
+            }
+        },
+        "PictureInfo": {
+            "type": "object",
+            "description": "url of item's picture"
+        },
+        "ItemPropOption": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "name of ItemProp."
+                },
+                "itemPropValue": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ItemPropValueOption"
+                    }
+                }
+            }
+        },
+        "ItemPropDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of ItemProp."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of ItemProp."
+                },
+                "itemPropValue": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ItemPropValueDTO"
+                    }
+                }
+            }
+        },
+        "ItemPropValueOption": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "name of ItemPropValue."
+                }
+            }
+        },
+        "ItemPropValueDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of ItemPropValue."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of ItemPropValue."
+                }
+            }
+        },
+        "ServiceInfoDTO": {
+            "type": "object",
+            "properties": {
+                "availableServiceNurse": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number",
+                                "format": "long",
+                                "description": "Id of avaiable service nurse."
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "name of avaiable service nurse."
+                            }
+                        }
+                    }
+                },
+                "availableServiceTime": {
+                    "type": "object",
+                    "properties": {
+                        "availableServiceDay": {
+                            "type": "object",
+                            "properties": {
+                                "startDay": {
+                                    "type": "integer",
+                                    "format": "long",
+                                    "description": "available start day in future."
+                                },
+                                "endDay": {
+                                    "type": "integer",
+                                    "format": "long",
+                                    "description": "available end day in future."
+                                }
+                            }
+                        },
+                        "availableServiceHour": {
+                            "type": "array",
+                            "items": {
+                                "description": "available service nurse's hour.",
+                                "type": "integer",
+                                "format": "long"
+                            }
+                        }
+                    }
+                },
+                "minPrepareTime": {
+                    "type": "number",
+                    "format": "long"
+                }
+            }
+        },
+        "ServiceInfoOption": {
+            "type": "object",
+            "properties": {
+                "availableServiceNurse": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number",
+                                "format": "long",
+                                "description": "Id of avaiable service nurse."
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "name of avaiable service nurse."
+                            }
+                        }
+                    }
+                },
+                "availableServiceTime": {
+                    "type": "object",
+                    "properties": {
+                        "availableServiceDay": {
+                            "type": "object",
+                            "properties": {
+                                "startDay": {
+                                    "type": "integer",
+                                    "format": "long",
+                                    "description": "available start day in future."
+                                },
+                                "endDay": {
+                                    "type": "integer",
+                                    "format": "long",
+                                    "description": "available end day in future."
+                                }
+                            }
+                        },
+                        "availableServiceHour": {
+                            "type": "array",
+                            "items": {
+                                "description": "available service nurse's hour.",
+                                "type": "integer",
+                                "format": "long"
+                            }
+                        }
+                    }
+                },
+                "minPrepareTime": {
+                    "type": "number",
+                    "format": "long"
+                }
+            }
+        },
+        "ServiceItemOption": {
+            "type": "object",
+            "properties": {
+                "itemId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of item."
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "desc of serviceItem."
+                },
+                "price": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "price of serviceItem."
+                },
+                "originPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "origin price of serviceItem."
+                },
+                "pricture": {
+                    "type": "object",
+                    "description": "picture of serviceItem.",
+                    "$ref": "#/definitions/Picture"
+                }
+            }
+        },
+        "ServiceItemDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of serviceItem."
+                },
+                "itemId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of item."
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "desc of serviceItem."
+                },
+                "price": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "price of serviceItem."
+                },
+                "originPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "origin price of serviceItem."
+                },
+                "pricture": {
+                    "type": "object",
+                    "description": "picture of serviceItem.",
+                    "$ref": "#/definitions/Picture"
+                }
+            }
+        },
+        "Category": {
+            "type": "object"
+        },
+        "StandardService": {
+            "type": "object"
+        },
+        "Result": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "the error code of request's result"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "the error message of request's result"
+                },
+                "displaymsg": {
+                    "type": "string",
+                    "description": "the error display message show to user"
+                },
+                "success": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "the success of the request's result"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1058 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "WarpDriver API",
+        "description": "Item Suport System -> WarpDriver API",
+        "version": "1.0.0"
+    },
+    "host": "api.zhushou.dev.youhujia.com",
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/api/wrapdrv/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/items/{departmentId}": {
+            "get": {
+                "summary": "Item List.",
+                "description": "get item list by departmentId.\n",
+                "tags": [
+                    "Item"
+                ],
+                "parameters": [
+                    {
+                        "name": "departmentId",
+                        "in": "path",
+                        "description": "the departmentId of nurse.",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "title": "ArrayOfItems",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "item",
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number",
+                                                "format": "long",
+                                                "description": "Id of Item."
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "updateAt": {
+                                                "type": "number",
+                                                "format": "long",
+                                                "description": "the lastest update time of Item."
+                                            },
+                                            "state": {
+                                                "type": "number",
+                                                "format": "long",
+                                                "description": "state of Item."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/delete": {
+            "patch": {
+                "summary": "delete item.",
+                "description": "set the item'state to deleted.\n",
+                "tags": [
+                    "Item"
+                ],
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "the itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/online": {
+            "patch": {
+                "summary": "online item.",
+                "description": "serviceProvider online item.\n",
+                "tags": [
+                    "Item"
+                ],
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "the itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "title": "ObjectOfItem",
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "Id of Item."
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "updateAt": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "the lastest update time of Item."
+                                        },
+                                        "state": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "state of Item."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/offline": {
+            "patch": {
+                "summary": "offline item.",
+                "description": "serviceProvider offline item.\n",
+                "tags": [
+                    "Item"
+                ],
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "the itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "title": "ObjectOfItem",
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "Id of Item."
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "updateAt": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "the lastest update time of Item."
+                                        },
+                                        "state": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "state of Item."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/submit-audit": {
+            "patch": {
+                "summary": "audit item.",
+                "description": "serviceProvider submit item to audit.\n",
+                "tags": [
+                    "Item"
+                ],
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "the itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "title": "ObjectOfItem",
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "Id of Item."
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "updateAt": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "the lastest update time of Item."
+                                        },
+                                        "state": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "state of Item."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/serviceInfo/{itemId}": {
+            "get": {
+                "summary": "get service info of item by id.",
+                "description": "get service info by itemId.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "itemId of item.",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "serviceInfo": {
+                                    "$ref": "#/definitions/ServiceInfoDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/category/list": {
+            "get": {
+                "summary": "get all categories.",
+                "description": "get categories info when load add item page.",
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "category": {
+                                    "$ref": "#/definitions/Category"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/standardService/{categoryId}/standardServices-template": {
+            "get": {
+                "summary": "get standardService list.",
+                "description": "categoryId standardService list by categroyId.",
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "categoryId which serviceProvider choose.",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "standardService": {
+                                    "$ref": "#/definitions/StandardService"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item": {
+            "post": {
+                "summary": "save item.",
+                "description": "save item's basic info include prop and Value.",
+                "parameters": [
+                    {
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "description": "item basic info",
+                        "schema": {
+                            "$ref": "#/definitions/ItemOption"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "serviceItem": {
+                                    "$ref": "#/definitions/ServiceItemDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}": {
+            "get": {
+                "summary": "get item info.",
+                "description": "get item detail info by itemId.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "itemId which serviceProvider operated or serviceItem refered .",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "item": {
+                                    "$ref": "#/definitions/ItemDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/serviceItem": {
+            "patch": {
+                "summary": "update serviceItem.",
+                "description": "update serviceItem's info except serviceItem's name.",
+                "parameters": [
+                    {
+                        "name": "serviceItem",
+                        "in": "body",
+                        "required": true,
+                        "description": "item basic info",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceItemOption"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "serviceInfo": {
+                                    "type": "object",
+                                    "properties": {
+                                        "itemId": {
+                                            "type": "number",
+                                            "format": "long",
+                                            "description": "Id of current Item's id."
+                                        },
+                                        "availableServiceNurse": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "format": "long",
+                                                        "description": "Id of avaiable service nurse."
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "description": "name of avaiable service nurse."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/serviceItem": {
+            "get": {
+                "summary": "get serviceItem info.",
+                "description": "get serviceItem list by itemId.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "itemId which serviceProvider operated or serviceItem refered .",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/Result"
+                                },
+                                "serviceItem": {
+                                    "$ref": "#/definitions/ServiceItemDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{itemId}/serviceInfo": {
+            "post": {
+                "summary": "Save service Info",
+                "description": "Save service Info.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "item's id",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    },
+                    {
+                        "name": "serviceInfo",
+                        "in": "body",
+                        "description": "item's service info",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ServiceInfoOption"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceInfoDTO"
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/": {
+            "patch": {
+                "summary": "Update item Info",
+                "description": "Update item Info.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "item's id",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    },
+                    {
+                        "name": "item",
+                        "in": "body",
+                        "description": "item's info",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ItemOption"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/ItemDTO"
+                        }
+                    }
+                }
+            }
+        },
+        "/item/{itemId}/serviceInfo": {
+            "patch": {
+                "summary": "Update service Info",
+                "description": "Save service Info.",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "item's id",
+                        "required": true,
+                        "type": "number",
+                        "format": "long"
+                    },
+                    {
+                        "name": "serviceInfo",
+                        "in": "body",
+                        "description": "item's service info",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ServiceInfoOption"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceInfoDTO"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ItemDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "Id of Item."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of Item."
+                },
+                "desc": {
+                    "type": "string",
+                    "description": "desc of Item."
+                },
+                "detailHTML": {
+                    "type": "string",
+                    "description": "detail info of Item."
+                },
+                "departmentId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "department of Item."
+                },
+                "categoryId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "category of Item."
+                },
+                "picture": {
+                    "title": "ArrayOfPics",
+                    "type": "array",
+                    "items": {
+                        "title": "pictures's url",
+                        "type": "string"
+                    }
+                },
+                "duration": {
+                    "type": "number",
+                    "format": "int32",
+                    "description": "ServiceItem is not avaliable."
+                },
+                "state": {
+                    "type": "string",
+                    "description": "state of Item."
+                },
+                "itemProp": {
+                    "type": "object",
+                    "description": "itemProp and itemPropValue of Item.",
+                    "$ref": "#/definitions/ItemPropDTO"
+                }
+            }
+        },
+        "ItemOption": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "name of Item."
+                },
+                "desc": {
+                    "type": "string",
+                    "description": "desc of Item."
+                },
+                "detailHTML": {
+                    "type": "string",
+                    "description": "detail info of Item."
+                },
+                "departmentId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "department of Item."
+                },
+                "categoryId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "category of Item."
+                },
+                "picture": {
+                    "title": "ArrayOfPics",
+                    "type": "array",
+                    "items": {
+                        "title": "pictures' url",
+                        "type": "string"
+                    }
+                },
+                "duration": {
+                    "type": "number",
+                    "format": "int32",
+                    "description": "ServiceItem is not avaliable."
+                },
+                "standardServiceTemplateId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "category of Item."
+                },
+                "standardServiceTemplateType": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "category of Item."
+                },
+                "itemProp": {
+                    "type": "object",
+                    "description": "itemProp and itemPropValue of Item.",
+                    "$ref": "#/definitions/ItemPropOption"
+                }
+            }
+        },
+        "Picture": {
+            "type": "object",
+            "properties": {
+                "pictureItem": {
+                    "type": "array",
+                    "description": "Item's pictures.",
+                    "items": {
+                        "$ref": "#/definitions/PictureInfo"
+                    }
+                }
+            }
+        },
+        "PictureInfo": {
+            "type": "object",
+            "description": "url of item's picture"
+        },
+        "ItemPropOption": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "name of ItemProp."
+                },
+                "itemPropValue": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ItemPropValueOption"
+                    }
+                }
+            }
+        },
+        "ItemPropDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of ItemProp."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of ItemProp."
+                },
+                "itemPropValue": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ItemPropValueDTO"
+                    }
+                }
+            }
+        },
+        "ItemPropValueOption": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "name of ItemPropValue."
+                }
+            }
+        },
+        "ItemPropValueDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of ItemPropValue."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of ItemPropValue."
+                }
+            }
+        },
+        "ServiceInfoDTO": {
+            "type": "object",
+            "properties": {
+                "availableServiceNurse": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number",
+                                "format": "long",
+                                "description": "Id of avaiable service nurse."
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "name of avaiable service nurse."
+                            }
+                        }
+                    }
+                },
+                "availableServiceTime": {
+                    "type": "object",
+                    "properties": {
+                        "availableServiceDay": {
+                            "type": "object",
+                            "properties": {
+                                "startDay": {
+                                    "type": "integer",
+                                    "format": "long",
+                                    "description": "available start day in future."
+                                },
+                                "endDay": {
+                                    "type": "integer",
+                                    "format": "long",
+                                    "description": "available end day in future."
+                                }
+                            }
+                        },
+                        "availableServiceHour": {
+                            "type": "array",
+                            "items": {
+                                "description": "available service nurse's hour.",
+                                "type": "integer",
+                                "format": "long"
+                            }
+                        }
+                    }
+                },
+                "minPrepareTime": {
+                    "type": "number",
+                    "format": "long"
+                }
+            }
+        },
+        "ServiceInfoOption": {
+            "type": "object",
+            "properties": {
+                "availableServiceNurse": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "number",
+                                "format": "long",
+                                "description": "Id of avaiable service nurse."
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "name of avaiable service nurse."
+                            }
+                        }
+                    }
+                },
+                "availableServiceTime": {
+                    "type": "object",
+                    "properties": {
+                        "availableServiceDay": {
+                            "type": "object",
+                            "properties": {
+                                "startDay": {
+                                    "type": "integer",
+                                    "format": "long",
+                                    "description": "available start day in future."
+                                },
+                                "endDay": {
+                                    "type": "integer",
+                                    "format": "long",
+                                    "description": "available end day in future."
+                                }
+                            }
+                        },
+                        "availableServiceHour": {
+                            "type": "array",
+                            "items": {
+                                "description": "available service nurse's hour.",
+                                "type": "integer",
+                                "format": "long"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ServiceItemOption": {
+            "type": "object",
+            "properties": {
+                "itemId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of item."
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "desc of serviceItem."
+                },
+                "price": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "price of serviceItem."
+                },
+                "originPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "origin price of serviceItem."
+                },
+                "isEnabled": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "state of serviceItem."
+                },
+                "pricture": {
+                    "title": "ObjecrOfPics",
+                    "type": "string",
+                    "description": "picture of serviceItem."
+                }
+            }
+        },
+        "ServiceItemDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of serviceItem."
+                },
+                "itemId": {
+                    "type": "number",
+                    "format": "long",
+                    "description": "id of item."
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "desc of serviceItem."
+                },
+                "price": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "price of serviceItem."
+                },
+                "originPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "origin price of serviceItem."
+                },
+                "isEnabled": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "state of serviceItem."
+                },
+                "pricture": {
+                    "type": "object",
+                    "description": "picture of serviceItem.",
+                    "$ref": "#/definitions/Picture"
+                }
+            }
+        },
+        "Category": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "levelOneId": {
+                    "type": "integer"
+                },
+                "levelOneName": {
+                    "type": "string"
+                },
+                "levelTwoId": {
+                    "type": "integer"
+                },
+                "levelTwoName": {
+                    "type": "string"
+                },
+                "levelThreeId": {
+                    "type": "integer"
+                },
+                "levelThreeName": {
+                    "type": "string"
+                },
+                "levelFourId": {
+                    "type": "integer"
+                },
+                "levelFourName": {
+                    "type": "string"
+                },
+                "levelFiveId": {
+                    "type": "integer"
+                },
+                "levelFiveName": {
+                    "type": "string"
+                }
+            }
+        },
+        "StandardService": {
+            "type": "object"
+        },
+        "Result": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "the error code of request's result"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "the error message of request's result"
+                },
+                "displaymsg": {
+                    "type": "string",
+                    "description": "the error display message show to user"
+                },
+                "success": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "the success of the request's"
+                }
+            }
+        }
+    }
+}
